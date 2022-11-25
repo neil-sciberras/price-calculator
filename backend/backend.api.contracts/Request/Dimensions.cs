@@ -1,7 +1,7 @@
 ﻿namespace backend.api.contracts.Request
 {
 	/// <summary>
-	/// The dimensions (in centimetres) of the package to be shipped
+	/// The dimensions (in centimeters) of the package to be shipped
 	/// </summary>
 	public class Dimensions
 	{

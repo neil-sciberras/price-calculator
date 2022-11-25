@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\backend.domain\backend.domain.csproj" />
+    <ProjectReference Include="..\..\backend.utilities\backend.utilities.csproj" />
+    <ProjectReference Include="..\backend.partners.interfaces\backend.partners.interfaces.csproj" />
+    <ProjectReference Include="..\..\backend.api.contracts\backend.api.contracts.csproj" />
+    <ProjectReference Include="..\backend.partners.limits\backend.partners.limits.csproj" />
+  </ItemGroup>
+
+</Project>
