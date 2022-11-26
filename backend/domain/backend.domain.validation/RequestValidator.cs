@@ -5,10 +5,19 @@ namespace backend.domain.validation
 {
 	public class RequestValidator : IRequestValidator
 	{
-		public ValidationResult Validate(PriceRequest request, Range weightRange, Range volumeRange)
+		private readonly Range _weightRange;
+		private readonly Range _volumeRange;
+
+		public RequestValidator(Range weightRange, Range volumeRange)
 		{
-			var weightResult = Validator.Validate(weightRange, request.Weight, "Weight");
-			var volumeResult = Validator.Validate(volumeRange, request.Dimensions.Volume, "Volume");
+			_weightRange = weightRange;
+			_volumeRange = volumeRange;
+		}
+
+		public ValidationResult Validate(PriceRequest request)
+		{
+			var weightResult = Validator.Validate(_weightRange, request.Weight, "Weight");
+			var volumeResult = Validator.Validate(_volumeRange, request.Dimensions.Volume, "Volume");
 
 			return weightResult.CombineWith(volumeResult);
 		}

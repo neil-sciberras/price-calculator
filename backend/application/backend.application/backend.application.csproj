@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\backend.utilities\backend.utilities.csproj" />
     <ProjectReference Include="..\..\partners\backend.partners.interfaces\backend.partners.interfaces.csproj" />
     <ProjectReference Include="..\backend.application.interfaces\backend.application.interfaces.csproj" />
