@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\domain\backend.domain\backend.domain.csproj" />
+    <ProjectReference Include="..\backend.domain.validation.tests\backend.domain.validation.tests.csproj" />
   </ItemGroup>
 
 </Project>
