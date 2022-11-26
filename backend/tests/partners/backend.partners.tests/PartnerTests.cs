@@ -9,7 +9,7 @@ using Range = backend.domain.Limits.Range;
 
 namespace backend.partners.tests
 {
-	public class PartnerBaseTests
+	public class PartnerTests
 	{
 		private Mock<IMapper> _mapperMock;
 		private Mock<IRequestValidator> _requestValidatorMock;
@@ -36,10 +36,10 @@ namespace backend.partners.tests
 				.Returns(new ValidationResult(true, null));
 
 			_requestValidatorMock
-				.Setup(mock => mock.Validate(It.IsAny<domain.Request.PriceRequest>(), It.IsAny<Range>(), It.IsAny<Range>()))
+				.Setup(mock => mock.Validate(It.IsAny<domain.Request.PriceRequest>()))
 				.Returns(new domain.ValidationResult(true, null));
 			
-			var partner = new Cargo4You(_mapperMock.Object, _requestValidatorMock.Object, _calculatorMock.Object);
+			var partner = new Partner(_mapperMock.Object, _requestValidatorMock.Object, _calculatorMock.Object);
 
 			// Act
 			var result = partner.Validate(request);
@@ -52,7 +52,7 @@ namespace backend.partners.tests
 				Times.Once);
 			
 			_requestValidatorMock.Verify(
-				mock => mock.Validate(It.IsAny<domain.Request.PriceRequest>(), It.IsAny<Range>(), It.IsAny<Range>()), 
+				mock => mock.Validate(It.IsAny<domain.Request.PriceRequest>()), 
 				Times.Once);
 			
 			_mapperMock.Verify(
@@ -72,7 +72,7 @@ namespace backend.partners.tests
 				.Setup(mock => mock.Calculate(It.IsAny<domain.Request.PriceRequest>()))
 				.Returns(10m);
 			
-			var partner = new Cargo4You(_mapperMock.Object, _requestValidatorMock.Object, _calculatorMock.Object);
+			var partner = new Partner(_mapperMock.Object, _requestValidatorMock.Object, _calculatorMock.Object);
 
 			// Act
 			var result = partner.Calculate(request);

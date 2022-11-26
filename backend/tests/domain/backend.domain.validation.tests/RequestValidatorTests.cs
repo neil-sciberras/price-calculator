@@ -59,10 +59,10 @@ namespace backend.domain.validation.tests
 				lowerLimit: new Limit(1000, false),
 				upperLimit: new Limit(4000, true));
 
-			var validator = new RequestValidator();
+			var validator = new RequestValidator(weightRange: weightRange, volumeRange: volumeRange);
 
 			// Act
-			var validationResult = validator.Validate(priceRequest, weightRange, volumeRange);
+			var validationResult = validator.Validate(priceRequest);
 
 			// Assert
 			Assert.AreEqual(expectedSuccess, validationResult.Success);
