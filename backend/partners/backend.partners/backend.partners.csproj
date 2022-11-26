@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\backend.utilities\backend.utilities.csproj" />
+    <ProjectReference Include="..\..\domain\backend.domain.calculation\backend.domain.calculation.csproj" />
     <ProjectReference Include="..\..\domain\backend.domain.validation\backend.domain.validation.csproj" />
     <ProjectReference Include="..\..\domain\backend.domain\backend.domain.csproj" />
     <ProjectReference Include="..\backend.partners.interfaces\backend.partners.interfaces.csproj" />

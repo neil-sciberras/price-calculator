@@ -51,6 +51,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "partners", "partners", "{BE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.partners.tests", "..\backend\tests\partners\backend.partners.tests\backend.partners.tests.csproj", "{3AE6557D-3F4B-4422-A507-385AD9677B5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend.domain.calculation", "..\backend\domain\backend.domain.calculation\backend.domain.calculation.csproj", "{6CA3E0BA-96B2-4CE6-8C26-399F94F24914}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,10 @@ Global
 		{3AE6557D-3F4B-4422-A507-385AD9677B5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AE6557D-3F4B-4422-A507-385AD9677B5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AE6557D-3F4B-4422-A507-385AD9677B5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CA3E0BA-96B2-4CE6-8C26-399F94F24914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CA3E0BA-96B2-4CE6-8C26-399F94F24914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CA3E0BA-96B2-4CE6-8C26-399F94F24914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CA3E0BA-96B2-4CE6-8C26-399F94F24914}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,6 +154,7 @@ Global
 		{BF7F8789-C74F-4B1E-93D8-BF8E7FF6F37E} = {74274339-51E7-4446-A0EA-9F56AB831115}
 		{BE42A88C-70C0-415E-BB62-B750E8DC6840} = {74274339-51E7-4446-A0EA-9F56AB831115}
 		{3AE6557D-3F4B-4422-A507-385AD9677B5F} = {BE42A88C-70C0-415E-BB62-B750E8DC6840}
+		{6CA3E0BA-96B2-4CE6-8C26-399F94F24914} = {FCB49702-344A-4694-9BDB-CD7231D620F4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B5CBBB76-CD6A-4668-AB8E-0887AD022404}
