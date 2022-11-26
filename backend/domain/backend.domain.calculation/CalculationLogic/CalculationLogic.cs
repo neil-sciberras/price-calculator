@@ -4,20 +4,20 @@ namespace backend.domain.calculation.CalculationLogic
 {
 	public class CalculationLogic : ICalculationLogic
 	{
-		private readonly IEnumerable<PriceBracket> _priceBrackets;
+		protected readonly IEnumerable<PriceBracket> PriceBrackets;
 
 		public CalculationLogic(IEnumerable<PriceBracket> priceBrackets)
 		{
 			priceBrackets = priceBrackets.NotNull(nameof(priceBrackets));
 
-			_priceBrackets = OrderByPriceAscending(priceBrackets);
+			PriceBrackets = OrderByPriceAscending(priceBrackets);
 		}
 
-		public decimal Calculate(decimal value)
+		public virtual decimal Calculate(decimal value)
 		{
 			try
 			{
-				return _priceBrackets.First(bracket => bracket.Range.Includes(value)).Price;
+				return PriceBrackets.First(bracket => bracket.Range.Includes(value)).Price;
 			}
 			catch (InvalidOperationException)
 			{

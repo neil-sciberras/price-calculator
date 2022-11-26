@@ -2,16 +2,16 @@
 {
 	public class Range
 	{
-		private readonly Limit? _lowerLimit;
-		private readonly Limit? _upperLimit;
+		public readonly Limit? LowerLimit;
+		public readonly Limit? UpperLimit;
 
 		public Range(Limit? lowerLimit = null, Limit? upperLimit = null)
 		{
 			if (lowerLimit  == null && upperLimit == null)
 				throw new ArgumentException("At least one limit should have a value");
 
-			_lowerLimit = lowerLimit;
-			_upperLimit = upperLimit;
+			LowerLimit = lowerLimit;
+			UpperLimit = upperLimit;
 		}
 		
 		public bool Includes(decimal value)
@@ -19,18 +19,18 @@
 			var greaterThanLower = true;
 			var smallerThanUpper = true;
 
-			if (_lowerLimit != null)
+			if (LowerLimit != null)
 			{
-				greaterThanLower = _lowerLimit.Inclusive
-					? value >= _lowerLimit.Value
-					: value > _lowerLimit.Value;
+				greaterThanLower = LowerLimit.Inclusive
+					? value >= LowerLimit.Value
+					: value > LowerLimit.Value;
 			}
 
-			if (_upperLimit != null)
+			if (UpperLimit != null)
 			{
-				smallerThanUpper = _upperLimit.Inclusive 
-					? value <= _upperLimit.Value
-					: value < _upperLimit.Value;
+				smallerThanUpper = UpperLimit.Inclusive 
+					? value <= UpperLimit.Value
+					: value < UpperLimit.Value;
 			}
 
 			return smallerThanUpper && greaterThanLower;
@@ -38,9 +38,9 @@
 
 		public string GetMessage()
 		{
-			var greaterThanMessageOrEmpty = _lowerLimit != null ? $">{_lowerLimit.GetMessage()}" : string.Empty;
-			var smallerThanMessageOrEmpty = _upperLimit != null ? $"<{_upperLimit.GetMessage()}" : string.Empty;
-			var andOrEmpty = _lowerLimit != null && _upperLimit != null ? " and " : string.Empty;
+			var greaterThanMessageOrEmpty = LowerLimit != null ? $">{LowerLimit.GetMessage()}" : string.Empty;
+			var smallerThanMessageOrEmpty = UpperLimit != null ? $"<{UpperLimit.GetMessage()}" : string.Empty;
+			var andOrEmpty = LowerLimit != null && UpperLimit != null ? " and " : string.Empty;
 
 
 			return $"should be {greaterThanMessageOrEmpty}{andOrEmpty}{smallerThanMessageOrEmpty}";
