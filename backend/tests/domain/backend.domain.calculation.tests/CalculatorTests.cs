@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace backend.domain.calculation.tests
 {
-	public class Tests
+	public class CalculatorTests
 	{
 		private Mock<ICalculationLogic> _weightCalculationLogicMock;
 		private Mock<ICalculationLogic> _volumeCalculationLogicMock;
