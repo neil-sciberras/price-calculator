@@ -7,6 +7,9 @@
 
 		public Range(Limit? lowerLimit = null, Limit? upperLimit = null)
 		{
+			if (lowerLimit  == null && upperLimit == null)
+				throw new ArgumentException("At least one limit should have a value");
+
 			_lowerLimit = lowerLimit;
 			_upperLimit = upperLimit;
 		}
@@ -36,9 +39,11 @@
 		public string GetMessage()
 		{
 			var greaterThanMessageOrEmpty = _lowerLimit != null ? $">{_lowerLimit.GetMessage()}" : string.Empty;
-			var smallerThanMessageOrEmpty = _upperLimit != null ? $" and <{_upperLimit.GetMessage()}" : string.Empty;
+			var smallerThanMessageOrEmpty = _upperLimit != null ? $"<{_upperLimit.GetMessage()}" : string.Empty;
+			var andOrEmpty = _lowerLimit != null && _upperLimit != null ? " and " : string.Empty;
 
-			return $"should be {greaterThanMessageOrEmpty}{smallerThanMessageOrEmpty}";
+
+			return $"should be {greaterThanMessageOrEmpty}{andOrEmpty}{smallerThanMessageOrEmpty}";
 		}
 	}
 }
