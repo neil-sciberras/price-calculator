@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\backend.api.contracts\backend.api.contracts.csproj" />
-    <ProjectReference Include="..\backend.api.contracts\backend.api.contracts.csproj" />
   </ItemGroup>
 
 </Project>

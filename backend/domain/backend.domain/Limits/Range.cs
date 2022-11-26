@@ -1,4 +1,4 @@
-﻿namespace backend.partners.limits
+﻿namespace backend.domain.Limits
 {
 	public class Range
 	{

@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\backend.domain\backend.domain.csproj" />
     <ProjectReference Include="..\..\backend.utilities\backend.utilities.csproj" />
+    <ProjectReference Include="..\..\domain\backend.domain.validation\backend.domain.validation.csproj" />
+    <ProjectReference Include="..\..\domain\backend.domain\backend.domain.csproj" />
     <ProjectReference Include="..\backend.partners.interfaces\backend.partners.interfaces.csproj" />
     <ProjectReference Include="..\..\backend.api.contracts\backend.api.contracts.csproj" />
-    <ProjectReference Include="..\backend.partners.limits\backend.partners.limits.csproj" />
   </ItemGroup>
 
 </Project>

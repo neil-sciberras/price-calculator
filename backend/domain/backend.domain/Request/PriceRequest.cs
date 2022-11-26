@@ -2,13 +2,13 @@
 {
 	public class PriceRequest
 	{
-		public PriceRequest(Weight weight, Dimensions dimensions)
+		public PriceRequest(decimal weight, Dimensions dimensions)
 		{
 			Weight = weight;
 			Dimensions = dimensions;
 		}
 
-		public Weight Weight { get; }
+		public decimal Weight { get; }
 		public Dimensions Dimensions { get; }
 	}
 }

@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\backend.api.contracts\backend.api.contracts.csproj" />
-    <ProjectReference Include="..\backend.domain\backend.domain.csproj" />
+    <ProjectReference Include="..\domain\backend.domain\backend.domain.csproj" />
   </ItemGroup>
 
 </Project>

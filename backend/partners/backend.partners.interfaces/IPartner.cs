@@ -5,7 +5,7 @@ namespace backend.partners.interfaces
 {
 	public interface IPartner
 	{
-		decimal Calculate(PriceRequest priceRequest);
 		ValidationResult Validate(PriceRequest priceRequest);
+		decimal Calculate(PriceRequest priceRequest);
 	}
 }
