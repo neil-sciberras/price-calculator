@@ -17,7 +17,7 @@ namespace spa.Controllers
 		}
 
 		[HttpPost]
-		public decimal Post(PriceRequest priceRequest)
+		public decimal Post([FromBody]PriceRequest priceRequest)
 		{
 			return _handler.Handle(priceRequest);
 		}

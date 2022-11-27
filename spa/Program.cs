@@ -1,4 +1,5 @@
 using backend.application;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddApplicationDependencies();
+builder.Services.AddSwaggerGen(options =>
+{
+	options.SwaggerDoc("v1", new OpenApiInfo()
+	{
+		Title = "Price Calculator API",
+		Version = "v1"
+	});
+});
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -21,10 +30,15 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-
 app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller}/{action=Index}/{id?}");
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+	c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+});
 
 app.MapFallbackToFile("index.html"); ;
 
