@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using backend.api.contracts;
 using backend.api.contracts.Request;
 using backend.partners.interfaces;
@@ -9,49 +10,74 @@ namespace backend.application.tests
 {
 	public class HandlerTests
 	{
-		private Mock<IPartner> _partnerMock;
-
-		[SetUp]
-		public void Setup()
+		private static IEnumerable<object[]> PartnerScenarios()
 		{
-			_partnerMock = new Mock<IPartner>();
+			yield return new object[]
+			{
+				new List<IPartner>
+				{
+					SetupPartnerMock(success: true, returnedPrice: 1).Object,
+					SetupPartnerMock(success: true, returnedPrice: 2).Object,
+					SetupPartnerMock(success: true, returnedPrice: 3).Object
+				}, 1
+			};
+
+			yield return new object[]
+			{
+				new List<IPartner>
+				{
+					SetupPartnerMock(success: false, message: "error message").Object,
+					SetupPartnerMock(success: true, returnedPrice: 2).Object,
+					SetupPartnerMock(success: true, returnedPrice: 3).Object
+				}, 2
+			};
 		}
 
-		[Test]
-		public void GivenAValidRequest_ThenCalculateIsCalled()
+		[Test, TestCaseSource(nameof(PartnerScenarios))]
+		public void GivenAtLeastOnePartnerReturnsSuccess_ThenCalculateReturnsMinimumPrice(
+			IEnumerable<IPartner> partnerList, int expectedPrice)
 		{
 			// Arrange
-			_partnerMock = SetupPartnerMock(_partnerMock, success: true);
-
-			var handler = new Handler(_partnerMock.Object);
+			var handler = new Handler(partnerList);
 
 			// Act
-			handler.Handle(new PriceRequest());
+			var result = handler.Handle(new PriceRequest());
 
 			// Assert
-			_partnerMock.Verify(mock => mock.Calculate(It.IsAny<PriceRequest>()), Times.Once);
+			Assert.AreEqual((decimal)expectedPrice, result);
 		}
 
 		[Test]
-		public void GivenAnInvalidRequest_ThenHandleThrows()
+		public void GivenAllPartnersReturnFailedValidations_ThenHandleThrows()
 		{
 			// Arrange
-			const string message = "example message";
-			_partnerMock = SetupPartnerMock(_partnerMock, success: false, message: message);
-
-			var handler = new Handler(_partnerMock.Object);
+			var handler = new Handler(new List<IPartner>
+			{
+				SetupPartnerMock(success: false, message: "error message 1").Object,
+				SetupPartnerMock(success: false, message: "error message 2").Object,
+				SetupPartnerMock(success: false, message: "error message 3").Object
+			});
 
 			// Act
 			// Assert
 			var exception = Assert.Throws<Exception>(() => handler.Handle(new PriceRequest()));
-			Assert.AreEqual(message, exception.Message);
+			Assert.AreEqual("error message 1\nerror message 2\nerror message 3", exception.Message);
 		}
 
-		private static Mock<IPartner> SetupPartnerMock(Mock<IPartner> partnerMock, bool success, string? message = null)
+		private static Mock<IPartner> SetupPartnerMock(bool success, decimal? returnedPrice = null, string? message = null)
 		{
+			var partnerMock = new Mock<IPartner>();
+
 			partnerMock
 				.Setup(mock => mock.Validate(It.IsAny<PriceRequest>()))
 				.Returns(new ValidationResult(success, message));
+
+			if (returnedPrice != null)
+			{
+				partnerMock
+					.Setup(mock => mock.Calculate(It.IsAny<PriceRequest>()))
+					.Returns(returnedPrice.Value);
+			}
 
 			return partnerMock;
 		}

@@ -1,27 +1,44 @@
 ﻿using backend.api.contracts.Request;
 using backend.application.interfaces;
 using backend.partners.interfaces;
-using backend.utilities;
+using static System.String;
 
 namespace backend.application
 {
 	public class Handler : IHandler
 	{
-		private readonly IPartner _partner;
-
-		public Handler(IPartner partner)
+		private readonly IEnumerable<IPartner> _partners;
+		
+		public Handler(IEnumerable<IPartner> partners)
 		{
-			_partner = partner.NotNull(nameof(partner));
+			_partners = partners;
 		}
 
 		public decimal Handle(PriceRequest priceRequest)
 		{
-			var validationResult = _partner.Validate(priceRequest);
+			var prices = new List<decimal>();
+			var validationErrorMessages = new List<string>();
 
-			if (!validationResult.Success)
-				throw new Exception(validationResult.Message);
+			foreach (var partner in _partners)
+			{
+				var validationResult = partner.Validate(priceRequest);
 
-			return _partner.Calculate(priceRequest);
+				if (validationResult.Success)
+				{
+					prices.Add(partner.Calculate(priceRequest));
+				}
+				else
+				{
+					validationErrorMessages.Add(validationResult.Message);
+				}
+			}
+
+			if (!prices.Any())
+			{
+				throw new Exception(Join("\n", validationErrorMessages));
+			}
+
+			return prices.Min();
 		}
 	}
 }
