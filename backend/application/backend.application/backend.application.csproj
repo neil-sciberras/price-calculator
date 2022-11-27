@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\backend.utilities\backend.utilities.csproj" />
+    <ProjectReference Include="..\..\infrastructure\backend.infrastructure.database\backend.infrastructure.database.csproj" />
     <ProjectReference Include="..\..\partners\backend.partners.interfaces\backend.partners.interfaces.csproj" />
     <ProjectReference Include="..\..\partners\backend.partners\backend.partners.csproj" />
     <ProjectReference Include="..\backend.application.interfaces\backend.application.interfaces.csproj" />

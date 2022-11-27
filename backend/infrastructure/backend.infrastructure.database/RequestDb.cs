@@ -6,6 +6,7 @@ namespace backend.infrastructure.database
 	public class RequestDb : DbContext
 	{
 		public RequestDb(DbContextOptions options) : base(options) { }
+		public RequestDb() : base() { }
 		public DbSet<Request> Requests { get; set; }
 	}
 }

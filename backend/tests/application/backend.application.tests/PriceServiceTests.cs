@@ -8,7 +8,7 @@ using NUnit.Framework;
 
 namespace backend.application.tests
 {
-	public class HandlerTests
+	public class PriceServiceTests
 	{
 		private static IEnumerable<object[]> PartnerScenarios()
 		{
@@ -38,10 +38,10 @@ namespace backend.application.tests
 			IEnumerable<IPartner> partnerList, int expectedPrice)
 		{
 			// Arrange
-			var handler = new Handler(partnerList);
+			var priceService = new PriceService(partnerList);
 
 			// Act
-			var result = handler.Handle(new PriceRequest());
+			var result = priceService.GetPrice(new PriceRequest());
 
 			// Assert
 			Assert.AreEqual((decimal)expectedPrice, result);
@@ -51,7 +51,7 @@ namespace backend.application.tests
 		public void GivenAllPartnersReturnFailedValidations_ThenHandleThrows()
 		{
 			// Arrange
-			var handler = new Handler(new List<IPartner>
+			var priceService = new PriceService(new List<IPartner>
 			{
 				SetupPartnerMock(success: false, message: "error message 1").Object,
 				SetupPartnerMock(success: false, message: "error message 2").Object,
@@ -60,7 +60,7 @@ namespace backend.application.tests
 
 			// Act
 			// Assert
-			var exception = Assert.Throws<Exception>(() => handler.Handle(new PriceRequest()));
+			var exception = Assert.Throws<Exception>(() => priceService.GetPrice(new PriceRequest()));
 			Assert.AreEqual("error message 1\nerror message 2\nerror message 3", exception.Message);
 		}
 

@@ -11,6 +11,6 @@ namespace backend.application
 		public static IServiceCollection AddApplicationDependencies(this IServiceCollection services)
 			=> services
 				.AddPartnerDependencies()
-				.AddScoped<IHandler, Handler>();
+				.AddScoped<IPriceService, PriceService>();
 	}
 }

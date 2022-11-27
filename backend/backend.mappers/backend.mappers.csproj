@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\backend.api.contracts\backend.api.contracts.csproj" />
     <ProjectReference Include="..\domain\backend.domain\backend.domain.csproj" />
+    <ProjectReference Include="..\infrastructure\backend.infrastructure.database.entities\backend.infrastructure.database.entities.csproj" />
   </ItemGroup>
 
 </Project>

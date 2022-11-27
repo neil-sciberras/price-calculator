@@ -9,17 +9,21 @@ namespace spa.Controllers
 	[Route("[controller]")]
 	public class PriceController : ControllerBase
 	{
-		private readonly IHandler _handler;
+		private readonly IPriceService _priceService;
+		private readonly IPersistedDataService _persistedDataService;
 
-		public PriceController(IHandler handler)
+		public PriceController(IPriceService priceService, IPersistedDataService persistedDataService)
 		{
-			_handler = handler.NotNull(nameof(handler));
+			_persistedDataService = persistedDataService;
+			_priceService = priceService.NotNull(nameof(priceService));
 		}
 
 		[HttpPost]
-		public decimal Post([FromBody]PriceRequest priceRequest)
+		public async Task<decimal> PostAsync([FromBody]PriceRequest priceRequest)
 		{
-			return _handler.Handle(priceRequest);
+			await _persistedDataService.SaveAsync(priceRequest);
+
+			return _priceService.GetPrice(priceRequest);
 		}
 	}
 }

@@ -2,8 +2,8 @@
 
 namespace backend.application.interfaces
 {
-	public interface IHandler
+	public interface IPriceService
 	{
-		decimal Handle(PriceRequest priceRequest);
+		decimal GetPrice(PriceRequest priceRequest);
 	}
 }

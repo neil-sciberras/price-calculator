@@ -5,16 +5,16 @@ using static System.String;
 
 namespace backend.application
 {
-	public class Handler : IHandler
+	public class PriceService : IPriceService
 	{
 		private readonly IEnumerable<IPartner> _partners;
 		
-		public Handler(IEnumerable<IPartner> partners)
+		public PriceService(IEnumerable<IPartner> partners)
 		{
 			_partners = partners;
 		}
 
-		public decimal Handle(PriceRequest priceRequest)
+		public decimal GetPrice(PriceRequest priceRequest)
 		{
 			var prices = new List<decimal>();
 			var validationErrorMessages = new List<string>();
