@@ -32,6 +32,7 @@
     <ProjectReference Include="..\backend\application\backend.application.interfaces\backend.application.interfaces.csproj" />
     <ProjectReference Include="..\backend\application\backend.application\backend.application.csproj" />
     <ProjectReference Include="..\backend\backend.utilities\backend.utilities.csproj" />
+    <ProjectReference Include="..\backend\infrastructure\backend.infrastructure.database\backend.infrastructure.database.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

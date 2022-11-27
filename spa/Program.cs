@@ -1,10 +1,12 @@
 using backend.application;
+using backend.infrastructure.database;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("Requests");
 
+// Add services to the container.
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddApplicationDependencies();
 builder.Services.AddSwaggerGen(options =>
@@ -16,6 +18,7 @@ builder.Services.AddSwaggerGen(options =>
 	});
 });
 builder.Services.AddControllersWithViews();
+builder.Services.AddDatabase(connectionString);
 
 var app = builder.Build();
 
