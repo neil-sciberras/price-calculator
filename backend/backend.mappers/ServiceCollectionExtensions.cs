@@ -1,8 +1,10 @@
-﻿using AutoMapper;
+﻿using System.Diagnostics.CodeAnalysis;
+using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace backend.mappers
 {
+	[ExcludeFromCodeCoverage]
 	public static class ServiceCollectionExtensions
 	{
 		public static IServiceCollection AddMapper(this IServiceCollection services)

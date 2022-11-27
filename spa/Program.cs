@@ -1,8 +1,11 @@
+using backend.application;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddApplicationDependencies();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
