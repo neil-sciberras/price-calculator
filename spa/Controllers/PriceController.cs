@@ -1,4 +1,5 @@
-﻿using backend.api.contracts.Request;
+﻿using System.ComponentModel.DataAnnotations;
+using backend.api.contracts.Request;
 using backend.application.interfaces;
 using backend.domain.validation.Exceptions;
 using backend.utilities;
@@ -19,8 +20,19 @@ namespace spa.Controllers
 			_priceService = priceService.NotNull(nameof(priceService));
 		}
 
+		/// <summary>
+		/// Gets the cheapest courier price
+		/// </summary>
+		/// <param name="priceRequest">The customer's request</param>
+		/// <response code="200">Returns price</response>
+		/// <response code="400">If the request is invalid (contains negative or zero values)</response>
+		/// <response code="500">If an unhandled exception occurs</response>
+
+		[ProducesResponseType(typeof(decimal), 200)]
+		[ProducesResponseType(typeof(string), 400)]
+		[ProducesResponseType(500)]
 		[HttpPost]
-		public async Task<IActionResult> PostAsync([FromBody]PriceRequest priceRequest)
+		public async Task<IActionResult> PostAsync([FromBody, Required]PriceRequest priceRequest)
 		{
 			try
 			{

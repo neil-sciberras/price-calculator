@@ -1,3 +1,4 @@
+using System.Reflection;
 using backend.application;
 using backend.infrastructure.database;
 using Microsoft.OpenApi.Models;
@@ -16,6 +17,9 @@ builder.Services.AddSwaggerGen(options =>
 		Title = "Price Calculator API",
 		Version = "v1"
 	});
+
+	var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+	options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 builder.Services.AddControllersWithViews();
 builder.Services.AddDatabase(connectionString);
