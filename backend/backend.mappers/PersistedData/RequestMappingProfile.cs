@@ -10,7 +10,7 @@ namespace backend.mappers.PersistedData
 		{
 			CreateMap<Request, api.contracts.PersistedData.Request>().ReverseMap();
 
-			CreateMap<PriceRequest, api.contracts.PersistedData.Request>()
+			CreateMap<PriceRequest, Request>()
 				.ForMember(dest => dest.Id, opts => opts.Ignore())
 				.ForMember(dest => dest.Date, opts => opts.Ignore())
 				.ForMember(dest => dest.Weight, opts => opts.MapFrom(src => src.Weight))
