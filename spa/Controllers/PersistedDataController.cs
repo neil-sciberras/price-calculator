@@ -16,9 +16,17 @@ namespace spa.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IEnumerable<Request>> GetAllAsync()
+		public async Task<IActionResult> GetAllAsync()
 		{
-			return await _persistedDataService.GetAllAsync();
+			try
+			{
+				return Ok(await _persistedDataService.GetAllAsync());
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				return StatusCode(500);
+			}
 		}
 	}
 }

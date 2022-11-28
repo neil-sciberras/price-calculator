@@ -19,11 +19,19 @@ namespace spa.Controllers
 		}
 
 		[HttpPost]
-		public async Task<decimal> PostAsync([FromBody]PriceRequest priceRequest)
+		public async Task<IActionResult> PostAsync([FromBody]PriceRequest priceRequest)
 		{
-			await _persistedDataService.SaveAsync(priceRequest);
+			try
+			{
+				await _persistedDataService.SaveAsync(priceRequest);
 
-			return _priceService.GetPrice(priceRequest);
+				return Ok(_priceService.GetPrice(priceRequest));
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				return StatusCode(500);
+			}
 		}
 	}
 }
