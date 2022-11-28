@@ -1,22 +1,92 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchPrice } from './components/FetchPrice';
-import { Counter } from './components/Counter';
+import { useState } from "react";
+import "./App.css";
 
-import './custom.css'
+function App() {
+    const [weight, setWeight] = useState("");
+    const [height, setHeight] = useState("");
+    const [width, setWidth] = useState("");
+    const [depth, setDepth] = useState("");
+    const [statusCode, setStatusCode] = useState("");
+    const [price, setPrice] = useState("");
+    const [message, setMessage] = useState("");
 
-export default class App extends Component {
-  static displayName = App.name;
+    let handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await fetch(
+                'https://localhost:7181/Price',
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        weight: weight,
+                        dimensions: {
+                            width: width,
+                            height: height,
+                            depth: depth
+                        }
+                    })
+                })
+                .then(response =>
+                {
+                    setStatusCode(response.status);
+                    return response.json();
+                })
+                .then(data => setPrice(data));
 
-  render () {
+            if (statusCode === 200)
+            {
+                setWeight("");
+                setHeight("");
+                setWidth("");
+                setDepth("");
+                setMessage("Request sent successfull. Price is: " + price);
+            }
+            else
+            {
+                setMessage("Some error occured. Status code is:" + statusCode);
+            }
+        }
+        catch (err)
+        {
+            console.log(err);
+        }
+    };
+
     return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-price' component={FetchPrice} />
-      </Layout>
+        <div className="App">
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="number"
+                    value={weight}
+                    placeholder="Weight"
+                    onChange={(e) => setWeight(e.target.value)}
+                />
+                <input
+                    type="number"
+                    value={height}
+                    placeholder="Height"
+                    onChange={(e) => setHeight(e.target.value)}
+                />
+                <input
+                    type="number"
+                    value={width}
+                    placeholder="Width"
+                    onChange={(e) => setWidth(e.target.value)}
+                />
+                <input
+                    type="number"
+                    value={depth}
+                    placeholder="Depth"
+                    onChange={(e) => setDepth(e.target.value)}
+                />
+
+                <button type="submit">Calculate</button>
+
+                <div className="message">{message ? <p>{message}</p> : null}</div>
+            </form>
+        </div>
     );
-  }
 }
+
+export default App;
