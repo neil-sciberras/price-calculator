@@ -1,5 +1,6 @@
 ﻿using backend.api.contracts.Request;
 using backend.application.interfaces;
+using backend.domain.validation.Exceptions;
 using backend.utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,10 @@ namespace spa.Controllers
 				await _persistedDataService.SaveAsync(priceRequest);
 
 				return Ok(_priceService.GetPrice(priceRequest));
+			}
+			catch (InvalidRequestException e)
+			{
+				return BadRequest(e.Message);
 			}
 			catch (Exception e)
 			{

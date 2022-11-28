@@ -1,5 +1,6 @@
 ﻿using backend.api.contracts.Request;
 using backend.application.interfaces;
+using backend.domain.validation.Exceptions;
 using backend.partners.interfaces;
 using static System.String;
 
@@ -35,7 +36,7 @@ namespace backend.application
 
 			if (!prices.Any())
 			{
-				throw new Exception(Join("\n", validationErrorMessages));
+				throw new InvalidRequestException(Join("\n", validationErrorMessages));
 			}
 
 			return prices.Min();

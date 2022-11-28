@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using backend.api.contracts;
 using backend.api.contracts.Request;
+using backend.domain.validation.Exceptions;
 using backend.partners.interfaces;
 using Moq;
 using NUnit.Framework;
@@ -60,7 +61,7 @@ namespace backend.application.tests
 
 			// Act
 			// Assert
-			var exception = Assert.Throws<Exception>(() => priceService.GetPrice(new PriceRequest()));
+			var exception = Assert.Throws<InvalidRequestException>(() => priceService.GetPrice(new PriceRequest()));
 			Assert.AreEqual("error message 1\nerror message 2\nerror message 3", exception.Message);
 		}
 
