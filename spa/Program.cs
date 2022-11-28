@@ -5,6 +5,13 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// enabling cors with endpoint routing
+builder.Services.AddCors(options =>
+	options.AddDefaultPolicy(builder =>
+	{
+		builder.WithOrigins("https://localhost:44459").AllowAnyHeader().AllowAnyMethod();
+	}));
+
 var connectionString = builder.Configuration.GetConnectionString("Requests");
 
 // Add services to the container.
@@ -33,13 +40,14 @@ if (!app.Environment.IsDevelopment())
 	app.UseHsts();
 }
 
+app.UseCors();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
 app.MapControllerRoute(
-	name: "default",
-	pattern: "{controller}/{action=Index}/{id?}");
+		name: "default",
+		pattern: "{controller}/{action=Index}/{id?}");
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>
