@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
+using backend.mappers.PersistedData;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace backend.mappers
@@ -13,6 +14,7 @@ namespace backend.mappers
 			{
 				cfg.AddProfile<PriceRequestMappingProfile>();
 				cfg.AddProfile<ValidationResultMappingProfile>();
+				cfg.AddProfile<RequestMappingProfile>();
 			});
 
 			var mapper = config.CreateMapper();

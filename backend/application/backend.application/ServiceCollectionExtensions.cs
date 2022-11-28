@@ -11,6 +11,8 @@ namespace backend.application
 		public static IServiceCollection AddApplicationDependencies(this IServiceCollection services)
 			=> services
 				.AddPartnerDependencies()
+				.AddSingleton<IDateService, DateService>()
+				.AddScoped<IPersistedDataService, PersistedDataService>()
 				.AddScoped<IPriceService, PriceService>();
 	}
 }
