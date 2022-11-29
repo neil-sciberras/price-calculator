@@ -17,7 +17,7 @@ RUN apt-get install -y libpng-dev libjpeg-dev curl libxi6 build-essential libgl1
 RUN curl -sL https://deb.nodesource.com/setup_lts.x | bash -
 RUN apt-get install -y nodejs
 WORKDIR /src
-COPY ["spa.csproj", "."]
+COPY ["spa/spa.csproj", "."]
 COPY ["../backend/infrastructure/backend.infrastructure.database/backend.infrastructure.database.csproj", "../backend/infrastructure/backend.infrastructure.database/"]
 COPY ["../backend/infrastructure/backend.infrastructure.database.entities/backend.infrastructure.database.entities.csproj", "../backend/infrastructure/backend.infrastructure.database.entities/"]
 COPY ["../backend/application/backend.application/backend.application.csproj", "../backend/application/backend.application/"]
