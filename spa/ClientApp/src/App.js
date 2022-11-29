@@ -53,25 +53,25 @@ function App() {
 				<input
 					type="number"
 					value={weight}
-					placeholder="Weight"
+					placeholder="Weight (kg)"
 					onChange={(e) => setWeight(e.target.value)}
 				required />
 				<input
 					type="number"
 					value={height}
-					placeholder="Height"
+					placeholder="Height (cm)"
 					onChange={(e) => setHeight(e.target.value)}
 				required />
 				<input
 					type="number"
 					value={width}
-					placeholder="Width"
+					placeholder="Width (cm)"
 					onChange={(e) => setWidth(e.target.value)}
 				required />
 				<input
 					type="number"
 					value={depth}
-					placeholder="Depth"
+					placeholder="Depth (cm)"
 					onChange={(e) => setDepth(e.target.value)}
 				required />
 
